@@ -4,7 +4,7 @@ import { getFrameMetadata } from "./utils/framesUtils";
 const frameMetadata = getFrameMetadata({
   buttons: ['Begin quiz'],
   image: 'https://quiz-frame.vercel.app/titleImage.png', // must be absolute path
-  post_url: 'https://quiz-frame.vercel.app/api/question?n=1',
+  post_url: 'https://quiz-frame.vercel.app/api/begin',
 });
 
 export const metadata: Metadata = {

@@ -17,9 +17,6 @@ async function getResponse(): Promise<NextResponse> {
                 <meta property="fc:frame:button:1" content="${PROMPT}" />
                 <meta property="fc:frame:post_url" content="${process.env.DOMAIN}/question/1" />
             </head>
-            <body>
-                <!-- Your frame content here -->
-            </body>
             </html>
             `
     );
