@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 const PROMPT = 'Begin quiz'
-const COVER_IMAGE = '/titleImage.png'
+const COVER_IMAGE = 'https://quiz-frame.vercel.app/titleImage.png'
 
 // show quiz title image
 // show begin button
@@ -28,3 +28,5 @@ async function getResponse(): Promise<NextResponse> {
 export async function POST(): Promise<Response> {
     return getResponse();
 }
+
+export const dynamic = 'force-dynamic';
