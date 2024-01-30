@@ -15,7 +15,7 @@ async function getResponse(): Promise<NextResponse> {
                 <meta property="fc:frame" content="vNext" />
                 <meta property="fc:frame:image" content="${COVER_IMAGE}" />
                 <meta property="fc:frame:button:1" content="${PROMPT}" />
-                <meta property="fc:frame:post_url" content="${process.env.DOMAIN}/question/1" />
+                <meta property="fc:frame:post_url" content="https://quiz-frame.vercel.app/question?n=1" />
             </head>
             </html>
             `

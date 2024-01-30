@@ -4,11 +4,9 @@ This project is deployed to https://quiz-frame.vercel.app
 
 ## TODO 
 
-- [] Get begin rendering in embed tool
-- [] Questions config
-- [] Store answers (in url data? or need db?)
-- [] Get result route rendering
-- [] Mint / share result
+- Questions config
+- Store answers as list in URL
+- Mint / share result
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -40,6 +38,14 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - [Warpcast embed tool](https://warpcast.com/~/developers/embeds)
 - [FramesGPT](https://chat.openai.com/g/g-vxALnvPFA-framesgpt)
 - [Poll frame example](https://github.com/farcasterxyz/fc-polls)
+
+#### Testing locally
+
+Test routes with `curl -X POST "http://localhost:3000/api/begin"` and ensure expected html is returned.
+
+#### Images
+
+Make sure to use absolute image paths and aspect ratio of 1.9:1
 
 ### Next.js
 

@@ -22,3 +22,40 @@ export const getFrameMetadata = function ({ buttons, image, post_url }: FrameMet
     metadata['fc:frame:post_url'] = post_url;
     return metadata;
 };
+
+const DOMAIN = 'https://quiz-frame.vercel.app'
+export function buildFrameMetaHTML({
+    title,
+    image,
+    postUrl,
+    buttons,
+}: {
+    title: string;
+    image: string;
+    postUrl: string;
+    buttons: string[];
+}) {
+    // Build buttons meta
+    let buttonsMeta = "";
+    buttons.forEach((button, index) => {
+        buttonsMeta += `<meta name="fc:frame:button:${index + 1
+            }" content="${button}">`;
+    });
+
+    return `<!DOCTYPE html>
+          <html>
+          <head>
+              <title>${title}</title>
+              <meta property="og:title" content="${title}">
+              <meta property="og:image" content="${DOMAIN}/${image}">
+              <meta name="fc:frame" content="vNext">
+              <meta name="fc:frame:image" content="${DOMAIN}/${image}">
+              <meta name="fc:frame:post_url" content="${DOMAIN}/${postUrl}">
+              ${buttonsMeta}
+          </head>
+          <body>
+              <p>${title}</p>
+          </body>
+          </html>`;
+}
+
