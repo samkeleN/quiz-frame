@@ -22,6 +22,15 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## Learn More
 
+### Farcaster frames
+
+- [Farcaster Frame documentation](https://warpcast.notion.site/Farcaster-Frames-4bd47fe97dc74a42a48d3a234636d8c5)
+- [Warpcast embed tool](https://warpcast.com/~/developers/embeds)
+- [FramesGPT](https://chat.openai.com/g/g-vxALnvPFA-framesgpt)
+- [Poll frame example](https://github.com/farcasterxyz/fc-polls)
+
+### Next.js
+
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
