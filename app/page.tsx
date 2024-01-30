@@ -10,6 +10,11 @@ const frameMetadata = getFrameMetadata({
 export const metadata: Metadata = {
   title: 'quiz frame',
   description: 'by larzalot.eth',
+  openGraph: {
+    title: 'quiz frame',
+    description: 'by larzalot.eth',
+    images: ['https://quiz-frame.vercel.app/titleImage.png'],
+  },
   other: {
     ...frameMetadata,
   },
