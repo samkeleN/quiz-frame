@@ -2,6 +2,14 @@
 
 This project is deployed to https://quiz-frame.vercel.app
 
+## TODO 
+
+- [] Get begin rendering in embed tool
+- [] Questions config
+- [] Store answers (in url data? or need db?)
+- [] Get result route rendering
+- [] Mint / share result
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
