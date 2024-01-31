@@ -55,9 +55,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     const buttons = options.map(option => option.buttonText);
 
     // create next url depending on whether there's another question
-    let postUrl = 'result'
+    let postUrl = 'api/result'
     if (questionNumber < QUIZ_CONFIG.length) {
-        postUrl = `question?n=${Number(questionNumber) + 1}`
+        postUrl = `api/question?n=${Number(questionNumber) + 1}`
     }
 
     // TODO get points from previous question if not first question
