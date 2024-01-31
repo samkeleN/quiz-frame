@@ -13,8 +13,6 @@ const RESULT_CONFIG = [
 // allow user to share
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-    const questionNumber = req.nextUrl.query.n;
-
     // TODO get points from previous question
     // Then add up all points
 

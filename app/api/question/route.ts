@@ -50,7 +50,7 @@ const QUIZ_CONFIG: QuestionConfig[] = [
 // rediect to following question or result page
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-    const questionNumber = req.nextUrl.query.n;
+    const questionNumber = req.nextUrl.searchParams.get('n');
     const { title, image, options } = QUIZ_CONFIG[questionNumber - 1];
     const buttons = options.map(option => option.buttonText);
 
@@ -62,7 +62,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
     // TODO get points from previous question if not first question
     // TODO add any points from previous question
-    // const previousPoints = req.nextUrl.query.points; // stored as comma separated string
+    // const previousPoints = req.nextUrl.searchParams.get('p'); // stored as comma separated string
     // if (previousPoints) {
     //     postUrl += `&points=${previousPoints}`
     // }
