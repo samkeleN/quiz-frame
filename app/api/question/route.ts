@@ -50,7 +50,7 @@ const QUIZ_CONFIG: QuestionConfig[] = [
 // rediect to following question or result page
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-    const questionNumber = req.nextUrl.searchParams.get('n');
+    const questionNumber = Number(req.nextUrl.searchParams.get('n'));
     const { title, image, options } = QUIZ_CONFIG[questionNumber - 1];
     const buttons = options.map(option => option.buttonText);
 
