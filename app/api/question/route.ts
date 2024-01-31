@@ -1,8 +1,8 @@
-import { buildFrameMetaHTML } from "@/app/utils/framesUtils";
+import { buildFrameMetaHTML, getButtonIndex } from "@/app/utils/framesUtils";
 import { NextResponse, NextRequest } from "next/server";
 
 
-
+// TODO make image just question text
 type QuestionConfig = {
     image: string; // question needs to be asked in this image
     title: string;
@@ -30,7 +30,7 @@ const QUIZ_CONFIG: QuestionConfig[] = [
             { buttonText: 'Feed', value: '1' },
             { buttonText: 'Say hello', value: '2' },
             { buttonText: 'Put it onchain', value: '3' },
-            { buttonText: 'Give sunglasses', value: '4' },
+            { buttonText: 'Hide', value: '4' },
         ]
     },
     {
@@ -60,12 +60,21 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         postUrl = `api/question?n=${Number(questionNumber) + 1}`
     }
 
-    // TODO get points from previous question if not first question
-    // TODO add any points from previous question
-    // const previousPoints = req.nextUrl.searchParams.get('p'); // stored as comma separated string
-    // if (previousPoints) {
-    //     postUrl += `&points=${previousPoints}`
-    // }
+    if (questionNumber > 1) {
+        try {
+            const previousPoints = req.nextUrl.searchParams.get('p'); // stored as comma separated string
+
+            const prevQuestionAnswerIndex = await getButtonIndex(req)
+            const prevQuestion = QUIZ_CONFIG[questionNumber - 2]
+            const prevQuestionAnswerValue = prevQuestion.options[prevQuestionAnswerIndex].value
+
+            postUrl += `&p=${previousPoints}${prevQuestionAnswerValue},`
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
 
     return new NextResponse(
         buildFrameMetaHTML({

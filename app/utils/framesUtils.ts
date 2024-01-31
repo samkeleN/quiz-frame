@@ -1,3 +1,5 @@
+import { NextRequest } from "next/server";
+
 type FrameMetadataResponse = {
     buttons: string[];
     image: string;
@@ -59,3 +61,19 @@ export function buildFrameMetaHTML({
           </html>`;
 }
 
+
+export async function getButtonIndex(req: NextRequest): Promise<number> {
+    try {
+        const body = await req.json();
+        if (body) {
+            // Button index is 1-indexed, but we want it to be 0-indexed
+            const buttonIndex = body?.untrustedData.buttonIndex - 1;
+            return buttonIndex;
+        }
+
+    } catch (err) {
+        console.error(err);
+    }
+
+    return 0;
+}
