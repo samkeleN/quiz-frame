@@ -2,10 +2,8 @@ import { buildFrameMetaHTML, getButtonIndex } from "@/app/utils/framesUtils";
 import { NextResponse, NextRequest } from "next/server";
 
 
-// TODO make image just question text
 type QuestionConfig = {
-    image: string; // question needs to be asked in this image
-    title: string;
+    title: string; // question printed in image
     options: {
         buttonText: string;
         value: string;
@@ -14,7 +12,6 @@ type QuestionConfig = {
 
 const QUIZ_CONFIG: QuestionConfig[] = [
     {
-        image: 'question1.png',
         title: 'What is your favorite color?',
         options: [
             { buttonText: 'Red', value: '1' },
@@ -24,7 +21,6 @@ const QUIZ_CONFIG: QuestionConfig[] = [
         ]
     },
     {
-        image: 'question2.png',
         title: 'What do you do when you see a chicken?',
         options: [
             { buttonText: 'Feed', value: '1' },
@@ -34,7 +30,6 @@ const QUIZ_CONFIG: QuestionConfig[] = [
         ]
     },
     {
-        image: 'question3.png',
         title: 'What do you cook for your worst enemy?',
         options: [
             { buttonText: 'Pasta', value: '1' },
@@ -51,7 +46,7 @@ const QUIZ_CONFIG: QuestionConfig[] = [
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
     const questionNumber = Number(req.nextUrl.searchParams.get('n'));
-    const { title, image, options } = QUIZ_CONFIG[questionNumber - 1];
+    const { title, options } = QUIZ_CONFIG[questionNumber - 1];
     const buttons = options.map(option => option.buttonText);
 
     // create next url depending on whether there's another question
@@ -79,7 +74,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     return new NextResponse(
         buildFrameMetaHTML({
             title,
-            image,
+            image: `api/image?text=${title}`,
             buttons,
             postUrl
         })
