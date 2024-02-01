@@ -16,24 +16,40 @@ const ACTIONS = ["Try again"]
 // allow user to share
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-    // add up the points from the final question and previous questions
-    const previousAnswerValue = await getPreviousAnswerValue(req, QUIZ_CONFIG.length)
-    const pointsData = req.nextUrl.searchParams.get('p');
-    const points = pointsData ? pointsData.split(',').map(Number) : [];
-    const totalPoints = points.reduce((a: number, b: number) => a + b, 0) + Number(previousAnswerValue);
+    let totalPoints: number = 1;
+    try {
+        // add up the points from the final question and previous questions
+        const previousAnswerValue = await getPreviousAnswerValue(req, QUIZ_CONFIG.length)
+        const pointsData = req.nextUrl.searchParams.get('p');
+        const points = pointsData ? pointsData.split(',').map(Number) : [];
+        totalPoints = points.reduce((a: number, b: number) => a + b, 0) + Number(previousAnswerValue);
 
-    // then find the result
-    const result = RESULT_CONFIG.find(({ min, max }) => totalPoints >= min && totalPoints <= max);
-    const { title, image } = result ?? RESULT_CONFIG[2];
+        // then find the result
+        const result = RESULT_CONFIG.find(({ min, max }) => totalPoints >= min && totalPoints <= max);
+        const { title, image } = result ?? RESULT_CONFIG[2];
 
-    return new NextResponse(
-        buildFrameMetaHTML({
-            title,
-            image,
-            buttons: ACTIONS,
-            postUrl: 'begin'
-        })
-    );
+        return new NextResponse(
+            buildFrameMetaHTML({
+                title,
+                image,
+                buttons: ACTIONS,
+                postUrl: 'begin'
+            })
+        );
+
+    } catch (e) {
+        console.error(e)
+        return new NextResponse(
+            buildFrameMetaHTML({
+                title: String(e) ?? 'error',
+                image: `api/image?text=${e}`,
+                buttons: ACTIONS,
+                postUrl: 'begin'
+            })
+        );
+    }
+
+
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
