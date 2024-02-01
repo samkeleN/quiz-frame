@@ -1,46 +1,9 @@
+import { QUIZ_CONFIG } from "@/app/config/quizConfig";
 import { buildFrameMetaHTML, getButtonIndex } from "@/app/utils/framesUtils";
+import { getPreviousAnswerValue } from "@/app/utils/quizUtils";
 import { NextResponse, NextRequest } from "next/server";
 
-
-type QuestionConfig = {
-    title: string; // question printed in image
-    options: {
-        buttonText: string;
-        value: string;
-    }[];
-}
-
-const QUIZ_CONFIG: QuestionConfig[] = [
-    {
-        title: 'What is your favorite color?',
-        options: [
-            { buttonText: 'Red', value: '1' },
-            { buttonText: 'Yellow', value: '2' },
-            { buttonText: 'Blue', value: '3' },
-            { buttonText: 'Purple', value: '4' },
-        ]
-    },
-    {
-        title: 'What do you do when you see a chicken?',
-        options: [
-            { buttonText: 'Feed', value: '1' },
-            { buttonText: 'Say hello', value: '2' },
-            { buttonText: 'Put it onchain', value: '3' },
-            { buttonText: 'Hide', value: '4' },
-        ]
-    },
-    {
-        title: 'What do you cook for your worst enemy?',
-        options: [
-            { buttonText: 'Pasta', value: '1' },
-            { buttonText: 'Juice', value: '2' },
-            { buttonText: 'Chicken feed', value: '3' },
-            { buttonText: 'Revenge', value: '4' },
-        ]
-    },
-]
-
-// show quiz title image
+// show quiz question in image
 // show 4 choices
 // rediect to following question or result page
 
@@ -56,20 +19,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     }
 
     if (questionNumber > 1) {
-        try {
-            const previousPoints = req.nextUrl.searchParams.get('p') ?? ''; // stored as comma separated string
-
-            const prevQuestionAnswerIndex = await getButtonIndex(req)
-            const prevQuestion = QUIZ_CONFIG[questionNumber - 2]
-            const prevQuestionAnswerValue = prevQuestion.options[prevQuestionAnswerIndex].value
-
-            postUrl += `&p=${previousPoints}${prevQuestionAnswerValue},`
-
-        } catch (error) {
-            console.error(error)
-        }
+        const previousPoints = req.nextUrl.searchParams.get('p') ?? ''; // stored as comma separated string
+        const prevQuestionAnswerValue = getPreviousAnswerValue(req, questionNumber)
+        postUrl += `&p=${previousPoints}${prevQuestionAnswerValue},`
     }
-
 
     return new NextResponse(
         buildFrameMetaHTML({
