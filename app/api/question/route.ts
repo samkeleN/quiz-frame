@@ -57,7 +57,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
     if (questionNumber > 1) {
         try {
-            const previousPoints = req.nextUrl.searchParams.get('p'); // stored as comma separated string
+            const previousPoints = req.nextUrl.searchParams.get('p') ?? ''; // stored as comma separated string
 
             const prevQuestionAnswerIndex = await getButtonIndex(req)
             const prevQuestion = QUIZ_CONFIG[questionNumber - 2]
