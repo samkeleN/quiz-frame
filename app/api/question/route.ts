@@ -20,7 +20,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
     if (questionNumber > 1) {
         const previousPoints = req.nextUrl.searchParams.get('p') ?? ''; // stored as comma separated string
-        const prevQuestionAnswerValue = getPreviousAnswerValue(req, questionNumber)
+        const prevQuestionAnswerValue = await getPreviousAnswerValue(req, questionNumber)
         postUrl += `&p=${previousPoints}${prevQuestionAnswerValue},`
     }
 

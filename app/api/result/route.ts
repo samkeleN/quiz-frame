@@ -17,7 +17,7 @@ const ACTIONS = ["Try again"]
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
     // add up the points from the final question and previous questions
-    const previousAnswerValue = getPreviousAnswerValue(req, QUIZ_CONFIG.length)
+    const previousAnswerValue = await getPreviousAnswerValue(req, QUIZ_CONFIG.length)
     const pointsData = req.nextUrl.searchParams.get('p');
     const points = pointsData ? pointsData.split(',').map(Number) : [];
     const totalPoints = points.reduce((a: number, b: number) => a + b, 0) + Number(previousAnswerValue);
