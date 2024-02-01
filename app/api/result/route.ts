@@ -1,4 +1,6 @@
+import { QUIZ_CONFIG } from "@/app/config/quizConfig";
 import { buildFrameMetaHTML } from "@/app/utils/framesUtils";
+import { getPreviousAnswerValue } from "@/app/utils/quizUtils";
 import { NextResponse, NextRequest } from "next/server";
 
 const RESULT_CONFIG = [
@@ -7,24 +9,28 @@ const RESULT_CONFIG = [
     { min: 7, max: 9, title: 'You are Base', image: 'base.png' },
     { min: 10, max: 12, title: 'You are Polygon', image: 'polygon.png' },
 ]
+const ACTIONS = ["Try again"]
 
 // add up score
 // show result
 // allow user to share
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
-    // TODO get points from previous question
-    // Then add up all points
+    // add up the points from the final question and previous questions
+    const previousAnswerValue = getPreviousAnswerValue(req, QUIZ_CONFIG.length)
+    const pointsData = req.nextUrl.searchParams.get('p');
+    const points = pointsData ? pointsData.split(',').map(Number) : [];
+    const totalPoints = points.reduce((a: number, b: number) => a + b, 0) + Number(previousAnswerValue);
 
-    const { title, image, } = RESULT_CONFIG[2]
-    const buttons = ["Try again"]
-
+    // then find the result
+    const result = RESULT_CONFIG.find(({ min, max }) => totalPoints >= min && totalPoints <= max);
+    const { title, image } = result ?? RESULT_CONFIG[2];
 
     return new NextResponse(
         buildFrameMetaHTML({
             title,
             image,
-            buttons,
+            buttons: ACTIONS,
             postUrl: 'begin'
         })
     );
