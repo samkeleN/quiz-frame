@@ -13,15 +13,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     const buttons = options.map(option => option.buttonText);
 
     // create next url depending on whether there's another question
-    let postUrl = 'api/result'
+    let postUrl = 'api/result?'
     if (questionNumber < QUIZ_CONFIG.length) {
-        postUrl = `api/question?n=${Number(questionNumber) + 1}`
+        postUrl = `api/question?n=${Number(questionNumber) + 1}&`
     }
 
     if (questionNumber > 1) {
         const previousPoints = req.nextUrl.searchParams.get('p') ?? ''; // stored as comma separated string
         const prevQuestionAnswerValue = await getPreviousAnswerValue(req, questionNumber)
-        postUrl += `&p=${previousPoints}${prevQuestionAnswerValue},`
+        postUrl += `p=${previousPoints}${prevQuestionAnswerValue},`
     }
 
     return new NextResponse(
