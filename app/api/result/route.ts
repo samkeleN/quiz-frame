@@ -9,7 +9,7 @@ const RESULT_CONFIG = [
     { min: 7, max: 9, title: 'You are Base', image: 'base.png' },
     { min: 10, max: 12, title: 'You are Polygon', image: 'polygon.png' },
 ]
-const ACTIONS = ["Try again"]
+const ACTIONS = ["Take it again!"]
 
 // add up score
 // show result
@@ -33,7 +33,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 title,
                 image,
                 buttons: ACTIONS,
-                postUrl: 'begin'
+                postUrl: 'api/begin'
             })
         );
 
@@ -44,7 +44,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 title: 'Error',
                 image: `api/image?text=${JSON.stringify(e)}`,
                 buttons: ACTIONS,
-                postUrl: 'begin'
+                postUrl: 'api/begin'
             })
         );
     }
