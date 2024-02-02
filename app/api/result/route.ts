@@ -39,7 +39,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
     } catch (e) {
         console.error(e)
-        return JSON.stringify(e)
+        return new NextResponse(
+            buildFrameMetaHTML({
+                title: 'Error',
+                image: `api/image?text=${JSON.stringify(e)}`,
+                buttons: ACTIONS,
+                postUrl: 'begin'
+            })
+        );
     }
 
 
