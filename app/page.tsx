@@ -1,33 +1,38 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 import { getFrameMetadata } from "./utils/framesUtils";
+import React from "react";
+import Link from "next/link";
 
 const frameMetadata = getFrameMetadata({
-  buttons: ['Begin quiz'],
-  image: 'https://quiz-frame.vercel.app/titleImage.png', // must be absolute path
-  post_url: 'https://quiz-frame.vercel.app/api/question?n=1',
+  buttons: ["Begin quiz"],
+  image: "https://quiz-frame.vercel.app/titleImage.png", // must be absolute path
+  post_url: "https://quiz-frame.vercel.app/api/question?n=1",
 });
 
 export const metadata: Metadata = {
-  title: 'quiz frame',
-  description: 'by larzalot.eth',
+  title: "quiz frame",
+  description: "by larzalot.eth",
   openGraph: {
-    title: 'quiz frame',
-    description: 'by larzalot.eth',
-    images: ['https://quiz-frame.vercel.app/titleImage.png'],
+    title: "quiz frame",
+    description: "by larzalot.eth",
+    images: ["https://quiz-frame.vercel.app/titleImage.png"],
   },
   other: {
     ...frameMetadata,
   },
 };
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm lg:flex">
-          <h1>created by larzalot.eth</h1>
-        </div>
-      </div>
-    </main>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-black">
+      <h1 className="text-4xl font-bold mb-6">Welcome to the Quiz Game!</h1>
+      <p className="text-lg mb-4">Test your knowledge and have fun!</p>
+      <Link
+        href="/quiz/format"
+        className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+      >
+        Start Quiz
+      </Link>
+    </div>
   );
 }
