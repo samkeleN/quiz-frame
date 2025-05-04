@@ -29,16 +29,6 @@ export const QUIZ_CONFIG: QuestionConfig[] = [
         ]
     },
     {
-        format: 'image-based',
-        title: 'What meal would you make for your worst enemy?',
-        options: [
-            { buttonText: 'Pasta', value: '1' },
-            { buttonText: 'Juice', value: '2' },
-            { buttonText: 'Chicken feed', value: '3' },
-            { buttonText: 'Revenge', value: '4' },
-        ]
-    },
-    {
         format: 'multiple-choice',
         title: 'What is the capital of France?',
         options: [
@@ -56,26 +46,6 @@ export const QUIZ_CONFIG: QuestionConfig[] = [
             { buttonText: 'Venus', value: '1' },
             { buttonText: 'Jupiter', value: '1' },
             { buttonText: 'Saturn', value: '1' },
-        ]
-    },
-    {
-        format: 'image-based',
-        title: 'Identify this famous landmark.',
-        options: [
-            { buttonText: 'Eiffel Tower', value: '5' },
-            { buttonText: 'Statue of Liberty', value: '1' },
-            { buttonText: 'Big Ben', value: '1' },
-            { buttonText: 'Colosseum', value: '1' },
-        ]
-    },
-    {
-        format: 'image-based',
-        title: 'Which animal is known as the King of the Jungle?',
-        options: [
-            { buttonText: 'Lion', value: '5' },
-            { buttonText: 'Tiger', value: '1' },
-            { buttonText: 'Elephant', value: '1' },
-            { buttonText: 'Cheetah', value: '1' },
         ]
     },
     {
