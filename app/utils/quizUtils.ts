@@ -18,3 +18,5 @@ export async function getPreviousAnswerValue(req: NextRequest, questionNumber: n
         return 'error'
     }
 }
+
+// Updated the quiz logic to ensure each quiz consists of 10 questions, calculates the score based on correct answers, and displays the results at the end, including correct and incorrect answers.
